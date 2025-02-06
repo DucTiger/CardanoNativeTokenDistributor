@@ -1,67 +1,59 @@
 # Cardano Native Token Distributor
 
-This module provides a way to distribute native tokens on the Cardano blockchain in a manner similar to how staking rewards are distributed. It aims to minimize the number of UTXOs created and reduce transaction fees for token holders.
+## Overview
+Cardano Native Token Distributor is an open-source module that allows developers to integrate automated, epoch-based native token distribution into their applications. This system ensures efficient token allocation with minimal UTXO congestion and reduced transaction fees. 
 
 ## Features
+- **Automated Distribution:** Tokens are allocated periodically based on epochs without requiring manual transactions.
+- **Low-Cost Claims:** Users only pay minimal transaction fees when claiming their tokens.
+- **Franken Address Prevention:** Secure address verification ensures that tokens are claimed by the rightful owner.
+- **Developer-Friendly API:** Simple RESTful API for easy integration into dApps, websites, and mobile applications.
+- **Open-Source & Modular:** Fully open-source with flexible customization options.
 
-* **Periodic Distribution:** Tokens are automatically distributed to designated wallets at set intervals (e.g., every epoch).
-* **UTXO Consolidation:** Instead of creating a new UTXO for each wallet in each distribution, tokens for an entire epoch are held within a single UTXO. This reduces network load and storage requirements.
-* **Claim Mechanism:** Token holders can claim their accumulated tokens from the distribution UTXO at any time.
-* **Batching:** Claim transactions can be batched together to further reduce transaction fees.
-* **Customizable:** The distribution logic (e.g., how much each wallet receives) can be customized via a smart contract.
+## Benefits
+- **Efficient Reward Distribution:** Ensures seamless token rewards similar to Cardano staking rewards.
+- **Scalability:** Reduces blockchain congestion by aggregating token claims over multiple epochs.
+- **Security:** Utilizes cryptographic proofs to validate wallet ownership.
+- **Cost-Effective:** Eliminates unnecessary network fees associated with frequent token transfers.
 
-## How It Works
+## Use Cases
+1. **Staking & Reward Systems**
+   - Projects can distribute staking rewards in native tokens efficiently.
+2. **Dividend Payments for DAOs & Companies**
+   - Automatically allocate dividends to token holders without manual intervention.
+3. **Payroll for Decentralized Teams**
+   - Distribute salaries or incentives periodically using smart contracts.
+4. **Gaming & NFT Royalties**
+   - Reward players, creators, or contributors on a scheduled basis.
+5. **Loyalty & Membership Programs**
+   - Allocate tokens to users based on participation, engagement, or loyalty milestones.
 
-1. **Initialization:**
-   * A smart contract is deployed to the Cardano blockchain.
-   * The total amount of tokens to be distributed is deposited into the contract.
+## Installation
+To integrate with your application, follow these steps:
 
-2. **Distribution:**
-   * At the start of each epoch, the smart contract calculates the distribution for each wallet based on the defined logic.
-   * A single UTXO is created, containing the tokens for that epoch's distribution. The contract stores a record of how much each wallet is owed.
+```bash
+npm install cardano-native-token-distributor-sdk
+```
 
-3. **Claiming:**
-   * Token holders can submit a transaction to the smart contract to claim their portion of the tokens from the distribution UTXO.
-   * The contract verifies the claim and transfers the appropriate amount of tokens to the holder's wallet.
+## Integration Example
+```javascript
+const TokenDistributor = require('cardano-native-token-distributor-sdk');
+const distributor = new TokenDistributor('YOUR_API_KEY');
 
-4. **Batching:**
-   * Multiple claim transactions can be bundled into a single transaction to reduce fees.
+distributor.claimTokens('addr1q...xyz', 'signed_message', 455)
+  .then(response => console.log("Transaction submitted:", response.transaction_id))
+  .catch(error => console.error("Error:", error));
+```
 
-## Getting Started
+## API Documentation
+For detailed API documentation, visit:
+[https://affiso.net](https://affiso.net)
 
-### Prerequisites
-
-* Basic understanding of Cardano and native tokens.
-* Familiarity with Cardano smart contract development (Plutus or Marlowe).
-* Cardano CLI or other tools for interacting with the Cardano blockchain.
-
-### Installation
-
-1. Clone the repository: `git clone https://github.com/DucTiger/CardanoNativeTokenDistributor.git`
-2. Install dependencies (if any).
-3. Deploy the smart contract to the Cardano blockchain.
-
-### Usage
-
-1. Configure the distribution logic within the smart contract.
-2. Deposit the tokens to be distributed into the contract.
-3. (Optional) Set up a process to automatically trigger the distribution at the start of each epoch.
-4. Token holders can then use a Cardano wallet or other tool to claim their tokens from the contract.
-
-## Examples
-
-* Provide examples of how to interact with the smart contract using the Cardano CLI or other tools.
-* Show how to customize the distribution logic.
+## Contact & Support
+- **Email:** duc.tigerpool@gmail.com
+- **Telegram:** [Tiger View](https://t.me/TIGERViewVN)
+- **Documentation:** [https://affiso.net](https://affiso.net)
 
 ## Contributing
+We welcome contributions! Please submit issues and pull requests to improve the module.
 
-Contributions are welcome! Please open an issue or submit a pull request.
-
-## License
-
-MIT
-
-## Contact
-
-* Duc Tiger
-* duc.tigerpool@gmail.com
